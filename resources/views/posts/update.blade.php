@@ -49,34 +49,38 @@
 
         <div class="row" style="padding: 15px 10px 15px 30px;">
             <div class="col-12">
-                <h3 style="font-weight: 400;">Create Post</h3>
+                <h3 style="font-weight: 400;">Update Post</h3>
             </div>
         </div>
         @include('layouts.partials')
-        <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row" style="background-color: #ccc; padding-top: 20px; padding-bottom: 45px;">
                 <div class="col-4"></div>
                 <div class="col-4"
                     style="padding: 20px 15px;background-color: white; border-radius: 5px; box-shadow: 0px 0px 5px 1px #999999;">
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Post title">
+                        <input type="text" name="title" class="form-control" value="{{ $post->title }}" placeholder="Post title">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Location</label>
-                        <input type="text" class="form-control" name="location" placeholder="location">
+                        <input type="text" class="form-control" name="location" value="{{ $post->location }}" placeholder="location">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea class="form-control" name="desc" rows="3"></textarea>
+                        <textarea class="form-control" name="desc" rows="3">{{ $post->desc }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Media</label>
                         <input type="file" name="image" class="form-control form-control-sm" style="border: none;">
                     </div>
+                    <div class="mb-3 d-flex justify-content-center">
+                        <img src="{{ asset('storage/' . $post->image) }}" width="100px" class="rounded d-flex mx-auto">
+                    </div>
                     <div class="col-12" style="text-align: right;">
-                        <button type="submit" class="btn btn-dark">Create Post</button>
+                        <button type="submit" class="btn btn-dark">Update Post</button>
                     </div>
                 </div>
                 <div class="col-4"></div>

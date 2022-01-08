@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
@@ -74,20 +76,21 @@
                                 @endphp
                                 <h6 style="font-size: 13.5px;"> Posted By @ {{ $user->name }}</h6>
                             </a></div>
-                        <div class="col-5"></div>
-                        <div class="col-1">
+                        <div class="col-4"></div>
+                        <div class="col-1 mb-2">
                             <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <button type="submit" class="btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"
-                                    style="color: red; cursor: pointer;">
-                                    <path
-                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg>
+                                    <i class="fas fa-trash-alt text-danger"></i>
                                 </button>
                             </form>
+                        </div>
+
+                        <div class="col-1 mt-2">
+                            <a href="{{ route('posts.edit', $post->id) }}">
+                                <i class="fas fa-edit text-primary"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="row" style="padding:10px 0px;">
@@ -97,7 +100,10 @@
                     </div>
                     <div class="row" style="padding:10px 0px;">
                         <div class="col-12">
-                            <h5>{{ $post->desc }}</h5>
+                            <h5>{{ $post->title }}</h5>
+                        </div>
+                        <div class="col-12">
+                            <p class="lead">{{ $post->desc }}</p>
                         </div>
                     </div>
                     <div class="row pt-3 pb-1" style="border-bottom: 1px solid #666; color: #666;">

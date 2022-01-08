@@ -46,6 +46,32 @@ class PostController extends Controller
         return redirect()->back()->with('success', __("Post has been added successfully"));
     }
 
+
+    public function edit(Post $post){
+        $active = "S";
+        return view('posts.update', compact('post', 'active'));
+    }
+
+    public function update(Request $request, Post $post){
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'location' => 'required',
+            'image' => 'image',
+        ]);
+
+        $data = $request->except("_token", "image", "user_id");
+
+        // Save Image
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->upload($request->image, "posts/images");
+        }
+
+        $post->update($data);
+        return redirect()->back()->with('success', __("Post has been added successfully"));
+    }
+
+
     public function destroy(Post $post)
     {
         $post->delete();
